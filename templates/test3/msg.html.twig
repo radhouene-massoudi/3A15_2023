@@ -1,0 +1,17 @@
+<h1>bonjour {{n |upper}}</h1>
+
+{%   set x=6    %}
+{{x}}
+{{dump(a)}}
+
+{% for t in a %}
+{{t.username}}
+<img src="{{t.picture}}">
+{% if(t.nb_books>0)%}
+<input type="submit"value='registe'>
+{%endif%}
+<a href="{{path('d',{'id':t.username}) }}"> details </a>
+{%else%}
+tableau vide
+{% endfor %}
+{{a|length}}
