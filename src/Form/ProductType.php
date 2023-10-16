@@ -20,7 +20,7 @@ class ProductType extends AbstractType
             ->add('description')
             ->add('catgory',EntityType::class,[
                 'class'=>Category::class,
-                'choice_label'=>'name',
+                'choice_label'=>'name'.'catid',
                 'expanded'=>false,
                 'multiple'=>false
             ])
