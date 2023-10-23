@@ -1,0 +1,32 @@
+
+
+<form method='post' action='/student/qb'>
+    <label> search by classe</label>
+    <input type='text' name='searchby'>
+    <input type='submit' value='search'>
+</form>
+{# dql
+    <form method='post' action='/student/dql'>
+        <label> search by classe</label>
+        <input type='text' name='searchby'>
+        <input type='submit' value='search'>
+    </form>
+{%if st !=null%}
+{% for student in st%}
+{{student.cin}}
+{{student.name}}
+<br>
+{% endfor %}
+{%else%}
+no result found
+{%endif%}
+#}
+
+{% for student in st%}
+{{student.cin}}
+{{student.name}}
+<br>
+{%else%}
+no result found
+
+{% endfor %}

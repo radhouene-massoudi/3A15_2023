@@ -45,4 +45,61 @@ class StudentRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+public function findStudentByClass($klass){
+$em=$this->getEntityManager();
+
+$req=$em->createQuery("select s from App\Entity\Student s join s.grades g where g.name=:espritclass");
+$req->setParameter('espritclass',$klass);   
+$result=$req->getResult();
+
+return $result;
+   
+}
+
+public function findStudentByClasspostion($klass){
+    $em=$this->getEntityManager();
+    
+    $req=$em->createQuery("select s from App\Entity\Student s join s.grades g where g.name=?1 order By s.cin ASC");
+    $req->setParameter('1',$klass);   
+    $result=$req->getResult();
+    
+    return $result;
+       
+    }
+
+
+    public function findAllQB(){
+        $condition=false;
+       $req= $this->createQueryBuilder('s')
+       ->select('s.name') 
+       ->addSelect('s.cin')
+       ;
+       if($condition){
+    $req ->where("s.name='test'");
+       }
+       
+       $preresult=$req->getQuery();
+       $result=$preresult->getResult();
+       return $result;
+           
+        }
+
+        public function findStudentByClassQB($klass){
+            $condition=false;
+           $req= $this->createQueryBuilder('s')
+           ->select('s.cin')
+           ->join('s.grades','g')
+           ->addSelect('g.name')
+           ;
+           if($condition){
+        $req ->where("s.name='test'");
+           }
+           
+           $preresult=$req->getQuery();
+           $result=$preresult->getDQL();
+           return $result;
+               
+            }
 }

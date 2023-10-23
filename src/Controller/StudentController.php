@@ -53,8 +53,42 @@ class StudentController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[Route('/dql', name: 'dql')]
+    public function fecthStudentsDql(StudentRepository $repo,Request $request)
+    {
+        $result=$repo->findAll();
+        if($request->isMethod('post')){
+            $value=$request->get('searchby');
+            //$result=$repo->findStudentByClass($value);
+            $result=$repo->findStudentByClasspostion($value);
+return $this->renderForm('student/searchByclass.html.twig', [
+    'st'=>$result,
+]);
+        }
    
+   return $this->renderForm('student/searchByclass.html.twig', [
+    'st'=>$result,
+   ]);
+    }
 
-    
+    #[Route('/qb', name: 'qb')]
+    public function fecthStudentsqb(StudentRepository $repo,Request $request)
+    {
+        $repo->findAllQB();
+        $result=$repo->findAllQB();
+        
+   
+   return $this->renderForm('student/searchByclass.html.twig', [
+    'st'=>$result,
+   ]);
+    }
+  
+    #[Route('/qbtwo', name: 'qbtwo')]
+    public function fecthStudentsByClassQB(StudentRepository $repo)
+    {
+        $result=$repo->findStudentByClassQB('3A15');
+        dd($result);
+    }
+
+
 }
